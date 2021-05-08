@@ -5,7 +5,7 @@ namespace UsersApi.Validators
 {
     public class UserValidator : IUserValidator
     {
-        private static readonly Regex userNameRegex = new Regex(@"^[\p{L} ]+$");
+        private static readonly Regex UserNameRegex = new Regex(@"^[\p{L} ]+$");
         public Result Validate(User user)
         {
             var userName = user.Name.Trim();
@@ -17,7 +17,7 @@ namespace UsersApi.Validators
             {
                 return Result.Error("User name length is too long. Max - 64");
             }
-            return !userNameRegex.IsMatch(userName) 
+            return !UserNameRegex.IsMatch(userName) 
                 ? Result.Error("User name should contain only letters and white spaces") 
                 : Result.Ok();
         }
