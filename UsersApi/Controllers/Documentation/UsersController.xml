@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Controller>
+    <Action name="Register">
+        <summary>Зарегистрировать нового пользователя</summary>
+        <param name="userRegistrationInfo">Данные пользователя</param>
+        <returns>Возвращает id созданного пользователя</returns>
+        <response code="200">Ок</response>
+        <response code="400">Неверные данные пользователя. Возможные причины:
+            &#10;* данный пользователь уже существует;
+            &#10;* невалидное имя пользователя.
+        </response>
+    </Action>
+    <Action name="Subscribe">
+        <summary>Подписать одного пользователя на другого</summary>
+        <param name="subscriberId">id подписчика</param>
+        <param name="useId">id подписанта</param>
+        <returns>Возвращает id созданной подписки</returns>
+        <response code="200">Ок</response>
+        <response code="400">Неверные данные. Возможные причины:
+            &#10;* одного из двух пользователей не существует;
+            &#10;* один подписант и подписчик.
+        </response>
+    </Action>
+    <Action name="Top">
+        <summary>Запросить топ полулярных пользователей</summary>
+        <param name="count">Количество пользоватлей</param>
+        <returns>Возвращает топ пользователей, отсортированных по количеству подписчиков в последней дате обновления</returns>
+        <response code="200">Ок</response>
+    </Action>
+</Controller>

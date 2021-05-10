@@ -10,7 +10,7 @@ using UsersApi.Validators;
 namespace UsersApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("users")]
     public class UsersController : ControllerBase
     {
         private readonly IUserValidator _validator;
@@ -28,6 +28,9 @@ namespace UsersApi.Controllers
             _usersService = usersService;
         }
 
+        
+        /// <include file='Documentation/UsersController.xml' path='Controller/Action[@name="Register"]/*'/>
+        [ProducesResponseType(typeof(Guid), 200)]
         [HttpPost("register")]
         public async Task<ActionResult> RegisterAsync([NotNull] UserRegistrationInfo userRegistrationInfo)
         {
@@ -44,6 +47,8 @@ namespace UsersApi.Controllers
         }
         
         
+        /// <include file='Documentation/UsersController.xml' path='Controller/Action[@name="Subscribe"]/*'/>
+        [ProducesResponseType(typeof(Guid), 200)]
         [HttpPost("{subscriberId}/subscribe")]
         public async Task<ActionResult> SubscribeAsync([NotNull] Guid subscriberId, [NotNull] Guid userId)
         {
@@ -53,6 +58,9 @@ namespace UsersApi.Controllers
                 : BadRequest(result.ErrorMessage);
         }
         
+        
+        /// <include file='Documentation/UsersController.xml' path='Controller/Action[@name="Top"]/*'/>
+        [ProducesResponseType(typeof(UserDto[]), 200)]
         [HttpGet("top")]
         public async Task<ActionResult> TopAsync([NotNull] int count)
         {

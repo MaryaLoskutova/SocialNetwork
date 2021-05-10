@@ -73,11 +73,12 @@ Parameters:
 Response: 
 
 ```
-{
- [
-    {Name = "", Count = ""}
- ] 
-}
+[
+  {
+    "name": "string",
+    "subscribersCount": 0
+  }
+]
 ```
 
 *PS:* 
