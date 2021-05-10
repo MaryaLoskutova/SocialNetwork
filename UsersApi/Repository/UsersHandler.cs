@@ -29,9 +29,22 @@ namespace UsersApi.Repository
                 .ToArrayAsync();
         }
 
+        public async Task<UserDbo[]> SelectAsync()
+        {
+            return await _context.Users
+                .ToArrayAsync();
+        }
+
         public async Task<UserDbo> CreateAsync(UserDbo userDbo)
         {
             await _context.AddAsync(userDbo);
+            await _context.SaveChangesAsync();
+            return userDbo;
+        }
+
+        public async Task<UserDbo> UpdateAsync(UserDbo userDbo)
+        {
+            _context.Update(userDbo);
             await _context.SaveChangesAsync();
             return userDbo;
         }

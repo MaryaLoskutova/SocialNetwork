@@ -6,7 +6,9 @@ namespace UsersApi.Repository
 {
     public interface IUsersRepository
     {
-        Task<Result<UserDbo>> CreateAsync(UserDto user);
-        Task<UserDbo[]> SelectAsync(Guid[] userIds);
+        Task<UserDbo> CreateAsync(UserDbo user);
+        Task<UserDbo[]> SelectAsync(params Guid[] userIds);
+        Task<UserDbo> UpdateAsync(UserDbo user);
+        Task<UserDbo> FindAsync(string userName);
     }
 }
