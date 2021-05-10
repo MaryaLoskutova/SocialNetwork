@@ -1,7 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using UsersApi.DataBases;
+using UsersApi.BusinessObjects;
 
 namespace UsersApi.Repository
 {
@@ -21,10 +22,18 @@ namespace UsersApi.Repository
                 .FirstOrDefaultAsync();
         }
 
-        public async Task CreateAsync(UserDbo userDbo)
+        public async Task<UserDbo[]> SelectAsync(Guid[] userIds)
+        {
+            return await _context.Users
+                .Where(b => userIds.Contains(b.UserId))
+                .ToArrayAsync();
+        }
+
+        public async Task<UserDbo> CreateAsync(UserDbo userDbo)
         {
             await _context.AddAsync(userDbo);
             await _context.SaveChangesAsync();
+            return userDbo;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using UsersApi.BusinessObjects;
-using UsersApi.DataBases;
 
 namespace UsersApi.Factories
 {

@@ -23,7 +23,7 @@ namespace UsersApi.UnitTests
         [TestCase("Anne   Bolein", "Anne   Bolein")]
         public void ValidateTest(string name, string expectedName)
         {
-            var user = new User() {Name = name};
+            var user = new UserRegistrationInfo() {Name = name};
             var result = _userConverter.ToDto(user);
             result.Should().BeEquivalentTo(new UserDto {Name = expectedName});
         }

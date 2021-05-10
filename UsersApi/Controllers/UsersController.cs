@@ -1,10 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using UsersApi.BusinessObjects;
 using UsersApi.Converters;
-using UsersApi.Repository;
+using UsersApi.Services;
 using UsersApi.Validators;
 
 namespace UsersApi.Controllers
@@ -13,37 +13,51 @@ namespace UsersApi.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly ILogger<UsersController> _logger;
         private readonly IUserValidator _validator;
-        private readonly IUsersRepository _usersRepository;
+        private readonly IUsersService _usersService;
         private readonly IUserConverter _userConverter;
 
         public UsersController(
-            ILogger<UsersController> logger,
             IUserValidator validator,
-            IUsersRepository usersRepository,
-            IUserConverter userConverter
+            IUserConverter userConverter,
+            IUsersService usersService
             )
         {
-            _logger = logger;
             _validator = validator;
-            _usersRepository = usersRepository;
             _userConverter = userConverter;
+            _usersService = usersService;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult> RegisterAsync([NotNull] User user)
+        public async Task<ActionResult> RegisterAsync([NotNull] UserRegistrationInfo userRegistrationInfo)
         {
-            var validateResult = _validator.Validate(user);
+            var validateResult = _validator.Validate(userRegistrationInfo);
             if (!validateResult.IsSuccess)
             {
                 return BadRequest(validateResult.ErrorMessage);
             }
             
-            var result = await _usersRepository.CreateAsync(_userConverter.ToDto(user));
+            var result = await _usersService.RegisterAsync(_userConverter.ToDto(userRegistrationInfo));
             return result.IsSuccess 
-                ? (ActionResult) Ok() 
+                ? (ActionResult) Ok(result.Value) 
                 : BadRequest(result.ErrorMessage);
+        }
+        
+        
+        [HttpPost("{subscriberId}/subscribe")]
+        public async Task<ActionResult> SubscribeAsync([NotNull] Guid subscriberId, [NotNull] Guid userId)
+        {
+            var result = await _usersService.SubscribeAsync(subscriberId, userId);
+            return result.IsSuccess 
+                ? (ActionResult) Ok(result.Value) 
+                : BadRequest(result.ErrorMessage);
+        }
+        
+        [HttpGet("top")]
+        public async Task<ActionResult> TopAsync([NotNull] int count)
+        {
+            var result = await _usersService.SelectTopPopularAsync(count);
+            return Ok(result);
         }
     }
 }

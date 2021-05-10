@@ -1,13 +1,15 @@
 ﻿namespace UsersApi.BusinessObjects
 {
-    public class Result
+    public class Result<T>
     {
         public bool IsSuccess { get; }
+        public T Value { get; }
         public string ErrorMessage { get; }
 
-        private Result(bool isSuccess)
+        private Result(bool isSuccess, T value)
         {
             IsSuccess = isSuccess;
+            Value = value;
         }
 
         private Result(bool isSuccess, string errorMessage)
@@ -15,14 +17,14 @@
             IsSuccess = isSuccess;
             ErrorMessage = errorMessage;
         }
-        public static Result Ok()
+        public static Result<T> Ok(T value)
         {
-            return new Result(true);
+            return new Result<T>(true, value);
         }        
         
-        public static Result Error(string message)
+        public static Result<T> Error(string message)
         {
-            return new Result(false, message);
+            return new Result<T>(false, message);
         }
     }
 }

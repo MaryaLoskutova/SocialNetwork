@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using UsersApi.BusinessObjects;
 using UsersApi.Factories;
 
@@ -18,15 +19,20 @@ namespace UsersApi.Repository
             _userFactory = userFactory;
         }
 
-        public async Task<Result> CreateAsync(UserDto user)
+        public async Task<Result<UserDbo>> CreateAsync(UserDto user)
         {
             if (await _usersHandler.FindAsync(user.Name) != null)
             {
-                return Result.Error("The user with the same name exists");
+                return Result<UserDbo>.Error("The user with the same name exists");
             }
             
-            await _usersHandler.CreateAsync(_userFactory.Create(user));
-            return Result.Ok();
+            var userDbo = await _usersHandler.CreateAsync(_userFactory.Create(user));
+            return Result<UserDbo>.Ok(userDbo);
+        }
+
+        public Task<UserDbo[]> SelectAsync(Guid[] userIds)
+        {
+            return _usersHandler.SelectAsync(userIds);
         }
     }
 }

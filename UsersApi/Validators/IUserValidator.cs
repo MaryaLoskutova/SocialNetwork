@@ -5,6 +5,6 @@ namespace UsersApi.Validators
 {
     public interface IUserValidator
     {
-        Result Validate([NotNull] User user);
+        Result<UserRegistrationInfo> Validate([NotNull] UserRegistrationInfo userRegistrationInfo);
     }
 }

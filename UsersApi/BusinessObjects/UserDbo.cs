@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace UsersApi.DataBases
+namespace UsersApi.BusinessObjects
 {
     [Table("User")]
     [Index(nameof(Name), IsUnique = true, Name = "Idx_UserName")]

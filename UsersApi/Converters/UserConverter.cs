@@ -4,11 +4,20 @@ namespace UsersApi.Converters
 {
     public class UserConverter : IUserConverter
     {
-        public UserDto ToDto(User user)
+        public UserDto ToDto(UserRegistrationInfo userRegistrationInfo)
         {
             return new UserDto
             {
-                Name = user.Name.Trim()
+                Name = userRegistrationInfo.Name.Trim()
+            };
+        }
+
+        public UserDto ToDto(UserDbo user, int subscribersCount)
+        {
+            return new UserDto()
+            {
+                SubscribersCount = subscribersCount,
+                Name = user.Name
             };
         }
     }

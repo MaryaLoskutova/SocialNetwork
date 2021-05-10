@@ -4,6 +4,7 @@ namespace UsersApi.Converters
 {
     public interface IUserConverter
     {
-        UserDto ToDto(User user);
+        UserDto ToDto(UserRegistrationInfo userRegistrationInfo);
+        UserDto ToDto(UserDbo user, int subscribersCount);
     }
 }

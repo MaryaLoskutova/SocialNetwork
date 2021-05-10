@@ -2,7 +2,7 @@
 
 namespace UsersApi.BusinessObjects
 {
-    public class User
+    public class UserRegistrationInfo
     {
         [Required]
         public string Name { get; set; }

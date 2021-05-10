@@ -4,7 +4,6 @@ using FluentAssertions;
 using Moq;
 using NUnit.Framework;
 using UsersApi.BusinessObjects;
-using UsersApi.DataBases;
 using UsersApi.Factories;
 using UsersApi.Repository;
 
@@ -30,7 +29,7 @@ namespace UsersApi.UnitTests
             var name = "Mariia";
             var user = new UserDto() {Name = name};
             var userDbo = new UserDbo() {Name = name, UserId = Guid.NewGuid()};
-            var expected = Result.Error("The user with the same name exists");
+            var expected = Result<UserDbo>.Error("The user with the same name exists");
             
             _usersHandler.Setup(p => p.FindAsync(user.Name)).ReturnsAsync(userDbo);
             
@@ -43,12 +42,13 @@ namespace UsersApi.UnitTests
         {
             var name = "Mariia";
             var user = new UserDto() {Name = name};
-            var userDbo = new UserDbo() {Name = name, UserId = Guid.NewGuid()};
-            var expected = Result.Ok();
+            var userId = Guid.NewGuid();
+            var userDbo = new UserDbo() {Name = name, UserId = userId};
+            var expected = Result<UserDbo>.Ok(userDbo);
             
             _usersHandler.Setup(p => p.FindAsync(user.Name)).ReturnsAsync((UserDbo) null);
             _userFactory.Setup(p => p.Create(user)).Returns(userDbo);
-            _usersHandler.Setup(p => p.CreateAsync(userDbo));
+            _usersHandler.Setup(p => p.CreateAsync(userDbo)).ReturnsAsync(userDbo);
             
             var result = await _usersRepository.CreateAsync(user);
             result.Should().BeEquivalentTo(expected);

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using UsersApi.DataBases;
+using UsersApi.BusinessObjects;
 
 namespace UsersApi
 {
@@ -10,5 +10,6 @@ namespace UsersApi
         {
         }
         public DbSet<UserDbo> Users { get; set; }
+        public DbSet<SubscriptionDbo> Subscriptions { get; set; }
     }
 }

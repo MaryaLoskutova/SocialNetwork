@@ -1,12 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=cebf91fa_002Db133_002D4ac9_002Dbe32_002D965274efc554/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ValidateTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;Or&gt;&#xD;
-    &lt;ProjectFile&gt;F5E6503C-4DFE-4CF1-892A-53DEA39DBFE0/f:UserValidatorTest.cs&lt;/ProjectFile&gt;&#xD;
-    &lt;TestAncestor&gt;&#xD;
-      &lt;TestId&gt;NUnit3x::F5E6503C-4DFE-4CF1-892A-53DEA39DBFE0::.NETCoreApp,Version=v3.1::UsersApi.UnitTests.UsersRepositoryTest.CreateWhenUserExistsTest&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;NUnit3x::F5E6503C-4DFE-4CF1-892A-53DEA39DBFE0::.NETCoreApp,Version=v3.1::UsersApi.UnitTests.UsersRepositoryTest.CreateSuccessTest&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;NUnit3x::F5E6503C-4DFE-4CF1-892A-53DEA39DBFE0::.NETCoreApp,Version=v3.1::UsersApi.UnitTests.UsersConverterTest.ValidateTest&lt;/TestId&gt;&#xD;
-      &lt;TestId&gt;NUnit3x::F5E6503C-4DFE-4CF1-892A-53DEA39DBFE0::.NETCoreApp,Version=v3.1::UsersApi.UnitTests.UsersConverterTest&lt;/TestId&gt;&#xD;
-    &lt;/TestAncestor&gt;&#xD;
-  &lt;/Or&gt;&#xD;
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
+  &lt;Assembly Path="C:\Users\smash\.nuget\packages\moq\4.16.1\lib\netstandard2.1\Moq.dll" /&gt;&#xD;
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1dc316bf_002D3c18_002D40f2_002D879e_002D72d3d7a57683/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from &amp;lt;UsersApi.UnitTests&amp;gt;" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Project Location="D:\TestProjects\SocialNetwork\SocialNetwork\UsersApi.UnitTests" Presentation="&amp;lt;UsersApi.UnitTests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

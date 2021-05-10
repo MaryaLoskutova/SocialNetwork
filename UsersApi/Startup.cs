@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using UsersApi.Converters;
-using UsersApi.DataBases;
 using UsersApi.Factories;
 using UsersApi.Repository;
+using UsersApi.Services;
 using UsersApi.Validators;
 
 namespace UsersApi
@@ -25,14 +25,18 @@ namespace UsersApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+            services.AddMemoryCache();
             services.AddDbContext<UsersDbContext>(
                 options => options.UseSqlite(@"Data Source=users.db"));
             services.AddTransient<IUserValidator, UserValidator>();
             services.AddScoped<IUsersHandler, UsersHandler>();
             services.AddScoped<IUsersRepository, UsersRepository>();
-            services.AddSingleton<IUserFactory, UserFactory>();
-            services.AddSingleton<IUserConverter, UserConverter>();
+            services.AddScoped<IUserFactory, UserFactory>();
+            services.AddScoped<IUserConverter, UserConverter>();
+            services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<ISubscriptionsHandler, SubscriptionsHandler>();
+            services.AddScoped<ISubscriptionsRepository, SubscriptionsRepository>();
+            services.AddScoped<ISubscriptionFactory, SubscriptionFactory>();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "UsersApi", Version = "v1"}); });
         }
 
